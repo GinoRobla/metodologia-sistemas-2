@@ -3,8 +3,8 @@ import { TurnoFactory } from "./TurnoFactory.abstract";
 
 export class SimpleTurno extends TurnoFactory{
     
-    crearTurno(cliente: string, barbero: string, fecha: string): Turno {
-        return new Turno(cliente, barbero, fecha, ['Corte'], 30, 500)
+    crearTurno(cliente: string, barbero: string, fecha: string, servicios:string): Turno {
+        return new Turno(cliente, barbero, fecha, servicios, 30, 500)
     }
     
 }
