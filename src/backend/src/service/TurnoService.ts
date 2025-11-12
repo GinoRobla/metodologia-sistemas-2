@@ -21,7 +21,8 @@ export class TurnoService {
 
     //Obtener turnos segun el cliente
     getTurnoByCliente(clienteName:string): Turno[] | [] {
-        throw new Error('Implemtar funcion')
+        const listTurnos = this.turnosList.filter(t => t.cliente === clienteName)
+        return listTurnos
     }
 
     //Crear Turno
