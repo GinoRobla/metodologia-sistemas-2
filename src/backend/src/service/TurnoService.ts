@@ -32,7 +32,7 @@ export class TurnoService {
     }
 
     //Cancelar Turno
-    deleteTurno(id:number): boolean{
+    deleteTurno(clienteName:string): boolean{
         throw new Error('Implemtar funcion')
     }
 }
