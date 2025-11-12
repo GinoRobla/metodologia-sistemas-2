@@ -26,7 +26,8 @@ export class TurnoService {
 
     //Crear Turno
     addTurno(turnoNew:Turno): Turno{
-        throw new Error('Implemtar funcion')
+        this.turnosList.push(turnoNew)
+        return turnoNew
     }
 
     //Cancelar Turno
