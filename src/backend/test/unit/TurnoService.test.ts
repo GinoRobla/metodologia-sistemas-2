@@ -13,4 +13,12 @@ describe('Funciones de turnoService', () => {
         expect(turno).toBeDefined()
         expect(svc.getSize()).toBe(1)
     })
+    it('getTurnoByCliente', () => {
+        const express = new ExpressFactory()
+        const svc = new TurnoService()
+        const turno = svc.addTurno(express.crearTurno('Perez', 'Agustin', '10/10/10', 'Barba'))
+
+        expect(svc.getTurnoByCliente('Perez')[0].barbero).toBe('Agustin')
+        expect(svc.getTurnoByCliente('Perez').length).toBe(1)
+    })
 })

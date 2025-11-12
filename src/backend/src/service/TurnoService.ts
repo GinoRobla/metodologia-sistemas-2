@@ -20,7 +20,7 @@ export class TurnoService {
     }
 
     //Obtener turnos segun el cliente
-    getTurnoByCliente(): Turno[] | Turno | undefined{
+    getTurnoByCliente(clienteName:string): Turno[] | [] {
         throw new Error('Implemtar funcion')
     }
 
