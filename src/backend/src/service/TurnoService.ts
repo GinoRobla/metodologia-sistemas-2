@@ -1,11 +1,8 @@
-import fa from "zod/v4/locales/fa.js";
 import { Turno } from "../factories/Turno";
-import th from "zod/v4/locales/th.js";
 
 export class TurnoService {
 
     private turnosList:Turno[] = []
-    private id_autoincremental:number = 1
 
     constructor(){}
 
@@ -14,11 +11,7 @@ export class TurnoService {
     }
 
     getTurnoList(): Turno[]{
-        throw new Error('Implemtar funcion')
-    }
-
-    getTurnoById(): Turno | undefined{
-        throw new Error('Implemtar funcion')
+        return this.turnosList
     }
 
     //Obtener turnos segun el cliente
