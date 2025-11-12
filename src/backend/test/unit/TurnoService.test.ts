@@ -34,6 +34,6 @@ describe('Funciones de turnoService', () => {
 
         expect(valor).toBe(true)
         expect(svc.getSize()).toBe(2)
-        expect(svc.getTurnoByCliente('Joaquin')).toBeUndefined()
+        expect(svc.getTurnoByCliente('Matias')).toStrictEqual([])
     })
 })

@@ -1,4 +1,6 @@
+import fa from "zod/v4/locales/fa.js";
 import { Turno } from "../factories/Turno";
+import th from "zod/v4/locales/th.js";
 
 export class TurnoService {
 
@@ -33,6 +35,9 @@ export class TurnoService {
 
     //Cancelar Turno
     deleteTurno(clienteName:string): boolean{
-        throw new Error('Implemtar funcion')
+        const idx = this.turnosList.findIndex(t => t.cliente === clienteName)
+        if(idx === -1) return false
+        this.turnosList.splice(idx, 1)
+        return true
     }
 }
