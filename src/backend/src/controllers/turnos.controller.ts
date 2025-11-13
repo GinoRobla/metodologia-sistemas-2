@@ -57,12 +57,22 @@ export class TurnosController {
             res.status(201).json(turnoNew)
 
         }catch{
-            res.status(400).json({error: 'Error al crear el usuario'})
+            res.status(400).json({error: 'Error al crear el turno'})
         }
     }
 
     public async deleteTurno(req:Request, res:Response){
-
+        try{
+            const {cliente} = req.body
+            const success = svc.deleteTurno(cliente)
+            if(success){
+                res.status(204).json({})
+            }else{
+                res.status(404).json({error: 'No se encontro ningun turno con ese nombre de cliente'})
+            }
+        }catch{
+            res.status(400).json({error: 'Error al cancelar el turno'})
+        }
     }
 }
 
