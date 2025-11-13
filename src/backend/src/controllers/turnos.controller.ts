@@ -1,5 +1,9 @@
 import { TurnoService } from "../service/TurnoService";
+import { ExpressFactory } from "../factories/ExpressFactory";
+import { ComboFactory } from "../factories/ComboFactory";
+import { SimpleTurno } from "../factories/SimpleFactory";
 import { Request, Response } from "express";
+import { Turno } from "../factories/Turno";
 
 const svc = new TurnoService()
 
@@ -15,7 +19,7 @@ export class TurnosController {
 
     public async getTurnoByCliente(req:Request, res:Response){
         try{
-            const cliente = req.body
+            const {cliente} = req.body
             const turno = svc.getTurnoByCliente(cliente)
             if(turno.length === 0){
                 res.status(404).json({error: 'El cliente no tiene ningun turno agendado'})
@@ -27,7 +31,34 @@ export class TurnosController {
     }
 
     public async addTurno(req:Request, res:Response){
+        try{
+            let factory
+            let turno
+            const {tipo} = req.body
+            const {cliente, barbero, fecha, servicios} = req.body
+            switch (tipo){
+                case 'Simple':
+                    factory = new SimpleTurno()
+                    turno = factory.crearTurno(cliente, barbero, fecha, servicios)
+                    break
+                case 'Combo':
+                    factory = new ComboFactory()
+                    turno = factory.crearTurno(cliente, barbero, fecha)
+                    break
+                case 'Express':
+                    factory = new ExpressFactory()
+                    turno = factory.crearTurno(cliente, barbero, fecha, servicios)
+                    break
+            }
+            if(!turno){
+                throw new Error('No existe el tipo de turno que seleccionaste')
+            }
+            const turnoNew = svc.addTurno(turno)
+            res.status(201).json(turnoNew)
 
+        }catch{
+            res.status(400).json({error: 'Error al crear el usuario'})
+        }
     }
 
     public async deleteTurno(req:Request, res:Response){
