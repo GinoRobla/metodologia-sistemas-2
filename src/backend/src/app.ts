@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { routerTurnos } from '../src/routes/turnos.route';
+import { routerTurnos } from './routes/turnos.route';
 
 class Server {
     public app: express.Application;
