@@ -2,6 +2,7 @@ import { TurnoService } from "../service/TurnoService";
 import { ExpressFactory } from "../factories/ExpressFactory";
 import { ComboFactory } from "../factories/ComboFactory";
 import { SimpleTurno } from "../factories/SimpleFactory";
+import { TurnoSchema } from "../schemas/turnos.schema";
 import { Request, Response } from "express";
 
 const svc = new TurnoService()
@@ -10,7 +11,7 @@ export class TurnosController {
     public async getAllTurnos(req:Request, res:Response) {
         try{
             const turnos = svc.getTurnoList()
-            res.status(200).json(turnos)
+            return res.status(200).json(turnos)
         }catch{
             return res.status(401).json({error: 'Error al obtener los datos'})
         }
@@ -21,15 +22,19 @@ export class TurnosController {
             const {cliente} = req.body
             const turno = svc.getTurnoByCliente(cliente)
             if(turno.length === 0){
-                res.status(404).json({error: 'El cliente no tiene ningun turno agendado'})
+                return res.status(404).json({error: 'El cliente no tiene ningun turno agendado'})
             }
-            res.status(200).json(turno)
+            return res.status(200).json(turno)
         }catch{
             return res.status(401).json({error: 'Error al obtener los datos'})
         }
     }
 
     public async addTurno(req:Request, res:Response){
+        const parse = TurnoSchema.safeParse(req.body)
+        if(!parse.success){
+            return res.status(400).json({ error: 'validationError', detail: 'Faltan datos' })
+        }
         try{
             let factory
             let turno
@@ -53,7 +58,7 @@ export class TurnosController {
                 throw new Error('No existe el tipo de turno que seleccionaste')
             }
             const turnoNew = svc.addTurno(turno)
-            res.status(201).json(turnoNew)
+            return res.status(201).json(turnoNew)
 
         }catch{
             return res.status(400).json({error: 'Error al crear el turno'})
@@ -65,9 +70,9 @@ export class TurnosController {
             const {cliente} = req.body
             const success = svc.deleteTurno(cliente)
             if(success){
-                res.status(204).json({})
+                return res.status(204).json({})
             }else{
-                res.status(404).json({error: 'No se encontro ningun turno con ese nombre de cliente'})
+                return res.status(404).json({error: 'No se encontro ningun turno con ese nombre de cliente'})
             }
         }catch{
             return res.status(400).json({error: 'Error al cancelar el turno'})
