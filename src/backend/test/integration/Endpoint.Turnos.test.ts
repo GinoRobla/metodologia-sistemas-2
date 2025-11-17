@@ -43,4 +43,24 @@ describe('Porbar los distintos endpoints de la ruta Turnos', () => {
         expect(get.status).toBe(200)
         expect(get.body[0].barbero).toBe('Agustin')
     })
+
+    it('Endpoint: getTurnoByCliente', async () => {
+        const res = await request(app)
+        .post('/api/turnos')
+        .send({
+            cliente: 'Perez',
+            barbero: 'Agustin',
+            fecha: '10/10/10',
+            servicios: 'Corte',
+            tipo: 'Simple'
+        })
+        const get = await request(app)
+        .get('/api/turnos/mis-turnos')
+        .send({
+            cliente:'Perez'
+        })
+
+        expect(get.status).toBe(200)
+        expect(get.body[0].barbero).toBe('Agustin')
+    })
 })
