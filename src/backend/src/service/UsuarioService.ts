@@ -5,22 +5,28 @@ export class UsuarioService {
     private usuarioList:Usuario[] = []
 
     getSize():number{
-        throw new Error
+        return this.usuarioList.length
     }
 
     getUsuarioList(): Usuario[]{
-        throw new Error
+        return this.usuarioList
     }
 
-    getUsuarioByEmail(): Usuario | undefined{
-        throw new Error
+    getUsuarioByEmail(email:string): Usuario | undefined{
+        const usuario = this.usuarioList.find(usu => usu.email === email)
+        return usuario
     }
 
-    addUsuario(): Usuario{
-        throw new Error
+    addUsuario(nombre:string, email:string, telefono:string, contraseña:string, tipoUsuario:string): Usuario{
+        const newUsu = new Usuario(nombre, email, telefono, contraseña, tipoUsuario)
+        this.usuarioList.push(newUsu)
+        return newUsu
     }
 
-    deleteUsuario(): boolean{
-        throw new Error
+    deleteUsuario(email:string): boolean{
+        const idx = this.usuarioList.findIndex(usu => usu.email === email)
+        if(idx === -1) return false
+        this.usuarioList.splice(idx, 1)
+        return true
     }
 }
