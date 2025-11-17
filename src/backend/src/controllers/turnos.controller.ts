@@ -3,7 +3,6 @@ import { ExpressFactory } from "../factories/ExpressFactory";
 import { ComboFactory } from "../factories/ComboFactory";
 import { SimpleTurno } from "../factories/SimpleFactory";
 import { Request, Response } from "express";
-import { Turno } from "../factories/Turno";
 
 const svc = new TurnoService()
 
@@ -13,7 +12,7 @@ export class TurnosController {
             const turnos = svc.getTurnoList()
             res.status(200).json(turnos)
         }catch{
-            res.status(401).json({error: 'Error al obtener los datos'})
+            return res.status(401).json({error: 'Error al obtener los datos'})
         }
     }
 
@@ -26,7 +25,7 @@ export class TurnosController {
             }
             res.status(200).json(turno)
         }catch{
-            res.status(401).json({error: 'Error al obtener los datos'})
+            return res.status(401).json({error: 'Error al obtener los datos'})
         }
     }
 
@@ -57,7 +56,7 @@ export class TurnosController {
             res.status(201).json(turnoNew)
 
         }catch{
-            res.status(400).json({error: 'Error al crear el turno'})
+            return res.status(400).json({error: 'Error al crear el turno'})
         }
     }
 
@@ -71,7 +70,7 @@ export class TurnosController {
                 res.status(404).json({error: 'No se encontro ningun turno con ese nombre de cliente'})
             }
         }catch{
-            res.status(400).json({error: 'Error al cancelar el turno'})
+            return res.status(400).json({error: 'Error al cancelar el turno'})
         }
     }
 }
