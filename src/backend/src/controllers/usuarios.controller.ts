@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { UsuarioService } from "../service/UsuarioService";
+import { UsuarioSchema } from "../schemas/usuarios.schema";
 
 const svc = new UsuarioService()
 
@@ -34,6 +35,10 @@ export class UsuariosController {
     }
 
     public async addUsuario(req:Request, res:Response){
+        const parse = UsuarioSchema.safeParse(req.body)
+        if(!parse.success){
+            return res.status(400).json({ error: 'validationError', detail: 'Faltan datos' })
+        }
         try{
             const {nombre, email, telefono, contraseña, tipoUsuario} = req.body
             const usuario = svc.addUsuario(nombre, email, telefono, contraseña, tipoUsuario)
