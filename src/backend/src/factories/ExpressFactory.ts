@@ -1,4 +1,4 @@
-import { Turno } from "./Turno";
+import { Turno } from "../models/Turno";
 import { TurnoFactory } from "./TurnoFactory.abstract";
 
 export class ExpressFactory extends TurnoFactory{
