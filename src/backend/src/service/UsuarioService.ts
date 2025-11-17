@@ -12,6 +12,16 @@ export class UsuarioService {
         return this.usuarioList
     }
 
+    getAllBarberos(): Usuario[] | []{
+        const usuarios = this.usuarioList.filter(usu => usu.tipoUsuario === 'Barbero')
+        return usuarios
+    }
+
+    getAllClientes(): Usuario[] | []{
+        const usuarios = this.usuarioList.filter(usu => usu.tipoUsuario === 'Cliente')
+        return usuarios
+    }
+
     getUsuarioByEmail(email:string): Usuario | undefined{
         const usuario = this.usuarioList.find(usu => usu.email === email)
         return usuario
