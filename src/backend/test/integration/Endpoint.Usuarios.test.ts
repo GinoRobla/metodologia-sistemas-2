@@ -48,19 +48,13 @@ describe('Probar los distintos endpoints de la ruta usuarios', () => {
     it('Endpoints: getAllClientes', async () => {
         await request(app)
         .post('/api/usuarios/auth/register')
-        .send([{
+        .send({
             nombre: "Juan",
             email: "juan@email.com",
             telefono: "2932-40354",
             contraseña: "juan123",
             tipoUsuario: "Cliente"
-        }, {
-            nombre: "Pedro",
-            email: "pedro@email.com",
-            telefono: "2932-47894",
-            contraseña: "pedro123",
-            tipoUsuario: "Cliente"
-        }])
+        })
 
         const get = await request(app)
         .get('/api/usuarios/list-clientes')
