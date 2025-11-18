@@ -1,6 +1,5 @@
 import { describe, test, it, expect } from 'vitest'
 import { TurnoService } from '../../src/service/TurnoService'
-import { Turno } from '../../src/factories/Turno'
 import {SimpleTurno} from '../../src/factories/SimpleFactory'
 import {ExpressFactory} from '../../src/factories/ExpressFactory'
 import {ComboFactory} from '../../src/factories/ComboFactory'

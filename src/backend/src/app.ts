@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import { routerTurnos } from './routes/turnos.route';
+import { routerUsuarios } from './routes/usuarios.route'
 
 class Server {
     public app: express.Application;
@@ -21,6 +22,7 @@ class Server {
     routes(){
         this.app.get('/health', (_req, res) => res.json({ ok: true }));
         this.app.use('/api/turnos', routerTurnos)
+        this.app.use('/api/usuarios', routerUsuarios)
     }
     start(callback: () => void) {
         this.app.listen(this.port, callback);
