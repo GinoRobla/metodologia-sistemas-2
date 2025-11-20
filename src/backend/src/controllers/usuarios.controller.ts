@@ -1,13 +1,43 @@
 import { Request, Response } from "express";
 import { UsuarioService } from "../service/UsuarioService";
 import { UsuarioSchema } from "../schemas/usuarios.schema";
+import jwt from "jsonwebtoken";
 
 const svc = new UsuarioService()
 
 export class UsuariosController {
     
     public async login(req:Request, res:Response) {
-        
+        try{
+            const {email, contraseña} = req.body
+            const usuFound = svc.getUsuarioByEmail(email)
+
+            if(!usuFound || !usuFound.contraseña){
+                throw new Error('Contraseña o Email incorrecto')
+            }
+
+            if(usuFound.contraseña !== contraseña){
+                throw new Error('Contraseña incorrecto')
+            }
+
+            const payload = {
+                userName: usuFound.nombre,
+                userEmail: usuFound.email
+            }
+
+            const token = jwt.sign(
+                        //ENV
+                payload, 'palabraSecreta',
+                {
+                    expiresIn: '24h',
+                }
+            )
+
+            return res.status(200).json(token)
+
+        }catch{
+            res.status(401).json({message: 'Error de password o email'})
+        }
     }
 
     public async getAllBarberos(req:Request, res:Response) {
