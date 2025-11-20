@@ -14,7 +14,7 @@ const verifyTokenMiddleware = (req:Request, res:Response, next: NextFunction) =>
     }
     const token = authHeader
 
-    try{
+    try{                                  //ENV
         const decoded = jwt.verify(token, 'palabraSecreta') as JwtPayLoadCustom
         (req as any).user = decoded
         next()

@@ -26,6 +26,7 @@ export class UsuariosController {
             }
 
             const token = jwt.sign(
+                        //ENV
                 payload, 'palabraSecreta',
                 {
                     expiresIn: '24h',
