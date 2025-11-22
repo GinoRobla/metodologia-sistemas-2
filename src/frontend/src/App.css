@@ -1,0 +1,21 @@
+.app {
+  min-height: 100vh;
+  background-color: var(--bg-light);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+p {
+  color: var(--text-dark);
+  font-size: 1.125rem;
+}
