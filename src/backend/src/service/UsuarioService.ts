@@ -1,4 +1,4 @@
-import { Usuario } from "../models/Usuario";
+import { Usuario } from "../factories/Usuario";
 
 export class UsuarioService {
 

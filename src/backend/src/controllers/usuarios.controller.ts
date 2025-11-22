@@ -1,16 +1,14 @@
 import { Request, Response } from "express";
-import { UsuarioService } from "../service/UsuarioService";
 import { UsuarioSchema } from "../schemas/usuarios.schema";
+import { Usuario } from "../models/Usuario";
 import jwt from "jsonwebtoken";
-
-const svc = new UsuarioService()
 
 export class UsuariosController {
     
     public async login(req:Request, res:Response) {
         try{
             const {email, contraseña} = req.body
-            const usuFound = svc.getUsuarioByEmail(email)
+            const usuFound = await Usuario.findOne({email: email})
 
             if(!usuFound || !usuFound.contraseña){
                 throw new Error('Contraseña o Email incorrecto')
@@ -43,7 +41,7 @@ export class UsuariosController {
 
     public async getAllBarberos(req:Request, res:Response) {
         try{
-            const usuarios = svc.getAllBarberos()
+            const usuarios = await Usuario.find({tipoUsuario: "Barbero"})
             if(usuarios.length === 0){
                 return res.status(404).json({error: 'No hay barberos registrados'})
             }
@@ -55,7 +53,7 @@ export class UsuariosController {
 
     public async getAllClientes(req:Request, res:Response){
         try{
-            const usuarios = svc.getAllClientes()
+            const usuarios = await Usuario.find({tipoUsuario: 'Cliente'})
             if(usuarios.length === 0){
                 return res.status(404).json({error: 'No hay clientes registrados'})
             }
@@ -72,8 +70,17 @@ export class UsuariosController {
         }
         try{
             const {nombre, email, telefono, contraseña, tipoUsuario} = req.body
-            const usuario = svc.addUsuario(nombre, email, telefono, contraseña, tipoUsuario)
-            return res.status(201).json(usuario)
+            const usuarioNew = new Usuario({
+                nombre: nombre,
+                email: email,
+                telefono: telefono,
+                contraseña: contraseña,
+                tipoUsuario: tipoUsuario
+            })
+
+            await usuarioNew.save()
+
+            return res.status(201).json(usuarioNew)
         }catch{
             return res.status(401).json({error: 'Error al obtener los datos'})
         }
@@ -81,12 +88,10 @@ export class UsuariosController {
 
     public async deleteUsuario(req:Request, res:Response){
         try{
-            const { email } = req.body
-            const success = svc.deleteUsuario(email)
-            if(!success){
-                return res.status(404).json({error: 'No se encontro ningun turno con ese nombre de cliente'})
-            }
-            return res.status(204).json({})
+            const id = req.params.id
+            await Usuario.deleteOne({_id: id})
+            .then(() => {return res.status(204).json({})})
+            .catch(() => {return res.status(404).json({error: 'No existe un turno con ese ID'})})
         }catch{
             return res.status(401).json({error: 'Error al obtener los datos'})
         }

@@ -1,4 +1,4 @@
-import { Turno } from "../models/Turno";
+import { Turno } from "../factories/Turno";
 
 export class TurnoService {
 
