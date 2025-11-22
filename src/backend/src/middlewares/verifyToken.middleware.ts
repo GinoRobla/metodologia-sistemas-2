@@ -3,7 +3,8 @@ import { Request, Response, NextFunction } from "express";
 
 interface JwtPayLoadCustom{
     userName: string,
-    userEmail: string
+    userEmail: string,
+    tipoUsuario: string
 }
 
 const verifyTokenMiddleware = (req:Request, res:Response, next: NextFunction) => {
