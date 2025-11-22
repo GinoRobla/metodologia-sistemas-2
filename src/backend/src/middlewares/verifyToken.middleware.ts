@@ -7,6 +7,8 @@ interface JwtPayLoadCustom{
     tipoUsuario: string
 }
 
+const password:string = process.env.PASSWORD_JWT
+
 const verifyTokenMiddleware = (req:Request, res:Response, next: NextFunction) => {
 
     const authHeader = req.header('authorization')
@@ -15,8 +17,8 @@ const verifyTokenMiddleware = (req:Request, res:Response, next: NextFunction) =>
     }
     const token = authHeader
 
-    try{                                  //ENV
-        const decoded = jwt.verify(token, 'palabraSecreta') as JwtPayLoadCustom
+    try{
+        const decoded = jwt.verify(token, password) as JwtPayLoadCustom
         (req as any).user = decoded
         next()
         
