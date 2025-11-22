@@ -1,4 +1,4 @@
-import { Turno } from "../models/Turno";
+import { Turno } from "./Turno";
 import { TurnoFactory } from "./TurnoFactory.abstract";
 
 export class ComboFactory extends TurnoFactory{
