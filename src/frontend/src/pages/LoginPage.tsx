@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import './LoginPage.css';
+import './css/LoginPage.css';
 
 function LoginPage() {
   // Estado para los campos del formulario

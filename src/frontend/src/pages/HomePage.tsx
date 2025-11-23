@@ -1,5 +1,6 @@
 import { useAuth } from '../context/AuthContext';
-import './HomePage.css';
+import { Link } from 'react-router-dom';
+import './css/HomePage.css';
 
 function HomePage() {
   const { user, logout } = useAuth();
@@ -37,23 +38,33 @@ function HomePage() {
           <p className="user-email">Email: {user?.email}</p>
 
           <div className="info-section">
-            <h3>✅ Autenticación funcionando correctamente</h3>
-            <p>El sistema de login está operativo. Próximos pasos:</p>
-            <ul>
-              {user?.tipoUsuario === 'Cliente' ? (
-                <>
-                  <li>Ver mis turnos</li>
-                  <li>Reservar nuevo turno</li>
-                  <li>Ver lista de barberos</li>
-                </>
-              ) : (
-                <>
-                  <li>Ver todos los turnos</li>
-                  <li>Gestionar clientes</li>
-                  <li>Administrar agenda</li>
-                </>
-              )}
-            </ul>
+            <h3>Acciones disponibles</h3>
+
+            {user?.tipoUsuario === 'Cliente' ? (
+              <div className="actions-grid">
+                <Link to="/reservar-turno" className="action-button">
+                  📅 Reservar Turno
+                </Link>
+                <button className="action-button" disabled>
+                  📋 Mis Turnos (Próximamente)
+                </button>
+                <button className="action-button" disabled>
+                  💈 Ver Barberos (Próximamente)
+                </button>
+              </div>
+            ) : (
+              <div className="actions-grid">
+                <button className="action-button" disabled>
+                  📅 Ver Todos los Turnos (Próximamente)
+                </button>
+                <button className="action-button" disabled>
+                  👥 Gestionar Clientes (Próximamente)
+                </button>
+                <button className="action-button" disabled>
+                  ⚙️ Administrar (Próximamente)
+                </button>
+              </div>
+            )}
           </div>
 
           <div className="debug-section">
