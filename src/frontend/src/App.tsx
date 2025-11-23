@@ -4,6 +4,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import HomePage from './pages/HomePage';
 import ReservarTurnoPage from './pages/ReservarTurnoPage';
+import MisTurnosPage from './pages/MisTurnosPage';
 import './App.css';
 
 function App() {
@@ -39,6 +40,11 @@ function App() {
         <Route
           path="/reservar-turno"
           element={user ? <ReservarTurnoPage /> : <Navigate to="/login" replace />}
+        />
+
+        <Route
+          path="/mis-turnos"
+          element={user ? <MisTurnosPage /> : <Navigate to="/login" replace />}
         />
 
         {/* Ruta por defecto: redirige a login o home según estado */}

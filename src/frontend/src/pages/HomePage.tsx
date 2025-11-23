@@ -45,9 +45,9 @@ function HomePage() {
                 <Link to="/reservar-turno" className="action-button">
                   📅 Reservar Turno
                 </Link>
-                <button className="action-button" disabled>
-                  📋 Mis Turnos (Próximamente)
-                </button>
+                <Link to="/mis-turnos" className="action-button">
+                  📋 Mis Turnos
+                </Link>
                 <button className="action-button" disabled>
                   💈 Ver Barberos (Próximamente)
                 </button>
