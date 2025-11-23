@@ -7,6 +7,9 @@ export class UsuariosController {
     
     public async login(req:Request, res:Response) {
         try{
+
+            const password:string = process.env.PASSWORD_JWT
+
             const {email, contraseña} = req.body
             const usuFound = await Usuario.findOne({email: email})
 
@@ -25,8 +28,8 @@ export class UsuariosController {
             }
 
             const token = jwt.sign(
-                        //ENV
-                payload, 'palabraSecreta',
+                
+                payload, password,
                 {
                     expiresIn: '24h',
                 }
