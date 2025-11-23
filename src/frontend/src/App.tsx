@@ -3,6 +3,7 @@ import { useAuth } from './context/AuthContext';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import HomePage from './pages/HomePage';
+import ReservarTurnoPage from './pages/ReservarTurnoPage';
 import './App.css';
 
 function App() {
@@ -34,6 +35,10 @@ function App() {
         <Route
           path="/"
           element={user ? <HomePage /> : <Navigate to="/login" replace />}
+        />
+        <Route
+          path="/reservar-turno"
+          element={user ? <ReservarTurnoPage /> : <Navigate to="/login" replace />}
         />
 
         {/* Ruta por defecto: redirige a login o home según estado */}
