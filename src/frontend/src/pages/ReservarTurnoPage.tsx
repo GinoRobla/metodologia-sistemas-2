@@ -11,6 +11,16 @@ interface Barbero {
   email: string;
 }
 
+// Define la estructura de un turno
+interface TurnoExistente {
+  _id: string;
+  barbero: string;
+  fecha: string;
+  duracion: number;
+  cliente: string;
+  servicios?: string;
+}
+
 function ReservarTurnoPage() {
   const navigate = useNavigate();
   const { user } = useAuth();
@@ -50,7 +60,7 @@ function ReservarTurnoPage() {
     setError('');
     setIsLoading(true);
 
-    // Validaciones
+    // Validaciones básicas
     if (!barberoSeleccionado) {
       setError('Debes seleccionar un barbero');
       setIsLoading(false);
@@ -61,6 +71,72 @@ function ReservarTurnoPage() {
       setError('Debes seleccionar una fecha');
       setIsLoading(false);
       return;
+    }
+
+    // Validación 1: No permitir fechas en el pasado
+    const fechaSeleccionada = new Date(fecha);
+    const ahora = new Date();
+    if (fechaSeleccionada < ahora) {
+      setError('No puedes reservar un turno en el pasado');
+      setIsLoading(false);
+      return;
+    }
+
+    // Validación 2: Horario de atención (Lunes a Sábado, 9:00 - 20:00)
+    const diaSemana = fechaSeleccionada.getDay();
+    const hora = fechaSeleccionada.getHours();
+
+    if (diaSemana === 0) {
+      setError('La peluquería no atiende los domingos');
+      setIsLoading(false);
+      return;
+    }
+
+    if (hora < 9 || hora >= 20) {
+      setError('El horario de atención es de 9:00 a 20:00');
+      setIsLoading(false);
+      return;
+    }
+
+    // Validación 3: Verificar disponibilidad del barbero
+    try {
+      const response = await api.get<TurnoExistente[]>('/turnos');
+      const todosTurnos = response.data;
+
+      // Filtrar turnos del barbero seleccionado
+      const turnosBarbero = todosTurnos.filter(
+        (turno: TurnoExistente) => turno.barbero === barberoSeleccionado
+      );
+
+      // Verificar si hay conflicto de horario
+      const hayConflicto = turnosBarbero.some((turno: TurnoExistente) => {
+        const fechaTurno = new Date(turno.fecha);
+        const duracionTurno = turno.duracion || 60; // Duración en minutos
+        const finTurno = new Date(fechaTurno.getTime() + duracionTurno * 60000);
+
+        // Calcular duración del turno que estamos reservando
+        let duracionNuevo = 60; // Por defecto 60 min
+        if (tipoTurno === 'Combo') duracionNuevo = 90;
+        if (tipoTurno === 'Express') duracionNuevo = 30;
+
+        const finNuevo = new Date(fechaSeleccionada.getTime() + duracionNuevo * 60000);
+
+        // Verificar si hay solapamiento
+        return (
+          (fechaSeleccionada >= fechaTurno && fechaSeleccionada < finTurno) ||
+          (finNuevo > fechaTurno && finNuevo <= finTurno) ||
+          (fechaSeleccionada <= fechaTurno && finNuevo >= finTurno)
+        );
+      });
+
+      if (hayConflicto) {
+        setError(`El barbero ${barberoSeleccionado} ya tiene un turno a esa hora. Por favor elige otro horario.`);
+        setIsLoading(false);
+        return;
+      }
+    } catch (err) {
+      console.error('Error al verificar disponibilidad:', err);
+      // Continuar con la reserva aunque falle la verificación
     }
 
     // Si es Simple o Express, servicios es obligatorio
