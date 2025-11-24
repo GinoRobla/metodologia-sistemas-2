@@ -4,7 +4,8 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import HomePage from './pages/HomePage';
 import ReservarTurnoPage from './pages/ReservarTurnoPage';
-import MisTurnosPage from './pages/MisTurnosPage';
+import MisTurnosPage from './pages/MisTurnosPage.tsx';
+import TodosTurnosPage from './pages/TodosTurnosPage.tsx'; 
 import './App.css';
 
 function App() {
@@ -45,6 +46,11 @@ function App() {
         <Route
           path="/mis-turnos"
           element={user ? <MisTurnosPage /> : <Navigate to="/login" replace />}
+        />
+
+         <Route
+          path="/todos-turnos"
+          element={user ? <TodosTurnosPage /> : <Navigate to="/login" replace />}
         />
 
         {/* Ruta por defecto: redirige a login o home según estado */}

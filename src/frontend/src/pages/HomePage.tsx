@@ -54,9 +54,9 @@ function HomePage() {
               </div>
             ) : (
               <div className="actions-grid">
-                <button className="action-button" disabled>
-                  📅 Ver Todos los Turnos (Próximamente)
-                </button>
+                <Link to="/todos-turnos" className="action-button primary">
+                  📅 Ver Todos los Turnos
+                </Link>
                 <button className="action-button" disabled>
                   👥 Gestionar Clientes (Próximamente)
                 </button>
