@@ -66,7 +66,9 @@ export class TurnosController {
             const turnosExistentes = await Turno.find({ barbero: barbero })
 
             for(const turnoExistente of turnosExistentes){
-                const fechaTurno = new Date(turnoExistente.fecha)
+                if(!turnoExistente.fecha) continue
+
+                const fechaTurno = new Date(turnoExistente.fecha as string)
                 const duracionTurno = turnoExistente.duracion || 60
                 const finTurno = new Date(fechaTurno.getTime() + duracionTurno * 60000)
 
