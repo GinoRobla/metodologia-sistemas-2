@@ -143,7 +143,7 @@ describe('App - Test de Integración', () => {
     render(<App />);
 
     await waitFor(() => {
-      expect(screen.getByText(/📅 Ver Todos los Turnos \(Próximamente\)/i)).toBeInTheDocument();
+      expect(screen.getByText(/📅 Ver Todos los Turnos/i)).toBeInTheDocument();
     });
   });
 
