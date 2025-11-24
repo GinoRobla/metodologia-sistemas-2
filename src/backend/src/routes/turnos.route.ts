@@ -6,6 +6,7 @@ export const routerTurnos = Router()
 
 routerTurnos.get('/', TurnosController.getAllTurnos)
 routerTurnos.get('/mis-turnos', verifyTokenMiddleware, TurnosController.getTurnoByCliente)
+routerTurnos.post('/mis-turnos', verifyTokenMiddleware, TurnosController.getTurnoByCliente)
 routerTurnos.post('/', verifyTokenMiddleware, TurnosController.addTurno)
 routerTurnos.delete('/:id', verifyTokenMiddleware, TurnosController.deleteTurno)
 

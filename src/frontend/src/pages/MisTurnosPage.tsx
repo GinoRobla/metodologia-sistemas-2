@@ -18,8 +18,7 @@ interface Turno {
 
 function MisTurnosPage() {
     const navigate = useNavigate();
-    const { user, logout, token } = useAuth();
-
+    const { user, logout } = useAuth();
 
     const [turnos, setTurnos] = useState<Turno[]>([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -29,10 +28,8 @@ function MisTurnosPage() {
         logout();
     };
 
-
     useEffect(() => {
-
-        if (!token && user === null) {
+        if (!user) {
             setIsLoading(false);
             return;
         }
@@ -40,8 +37,10 @@ function MisTurnosPage() {
         const cargarMisTurnos = async () => {
             setIsLoading(true);
             try {
-
-                const response = await api.get('/turnos/mis-turnos');
+                // Enviar el nombre del cliente en el body con POST
+                const response = await api.post('/turnos/mis-turnos', {
+                    cliente: user?.nombre
+                });
                 setTurnos(response.data);
                 setError('');
             } catch (err: any) {
@@ -56,9 +55,7 @@ function MisTurnosPage() {
         };
 
         cargarMisTurnos();
-
-
-    }, [token, user]);
+    }, [user]);
 
 
     const handleCancelar = async (id: string) => {
