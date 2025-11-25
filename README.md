@@ -104,49 +104,49 @@ Garantiza una unica instancia de los servicios `TurnoService` y `UsuarioService`
 ### Inicio de Sesion
 Pantalla de login con validacion de credenciales.
 
-![Login](./screenshots/login.png)
+![Login](./src/screenshots/login.png)
 
 ---
 
 ### Registro de Usuario
 Formulario de registro para clientes y barberos.
 
-![Registro](./screenshots/register.png)
+![Registro](./src/screenshots/register.png)
 
 ---
 
 ### Panel de Cliente
 Vista principal para clientes con acceso a reservar turnos y ver sus turnos.
 
-![Inicio Cliente](./screenshots/inicio-cliente.png)
+![Inicio Cliente](./src/screenshots/inicio-cliente.png)
 
 ---
 
 ### Panel de Barbero
 Vista principal para barberos con acceso a ver todos los turnos.
 
-![Inicio Barbero](./screenshots/inicio-barbero.png)
+![Inicio Barbero](./src/screenshots/inicio-barbero.png)
 
 ---
 
 ### Reservar Turno
 Formulario completo para reservar un turno con validaciones en tiempo real.
 
-![Reservar Turno](./screenshots/reservar-turno.png)
+![Reservar Turno](./src/screenshots/reservar-turno.png)
 
 ---
 
 ### Mis Turnos (Cliente)
 Lista de turnos reservados por el cliente con opcion de cancelar.
 
-![Mis Turnos](./screenshots/mis-turnos.png)
+![Mis Turnos](./src/screenshots/mis-turnos.png)
 
 ---
 
 ### Agenda del Barbero
 Vista completa de todos los turnos agendados en la barberia.
 
-![Agenda Barbero](./screenshots/agenda-barbero.png)
+![Agenda Barbero](./src/screenshots/agenda-barbero.png)
 
 ---
 
