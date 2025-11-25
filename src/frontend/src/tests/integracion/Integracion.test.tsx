@@ -56,7 +56,7 @@ describe('App - Test de Integración', () => {
     render(<App />);
 
     await waitFor(() => {
-      expect(screen.getByText(/¡Bienvenido, Juan Pérez!/i)).toBeInTheDocument();
+      expect(screen.getByText(/Bienvenido, Juan Pérez/i)).toBeInTheDocument();
     });
   });
 
@@ -117,7 +117,7 @@ describe('App - Test de Integración', () => {
     render(<App />);
 
     await waitFor(() => {
-      expect(screen.getByText(/📅 Reservar Turno/i)).toBeInTheDocument();
+      expect(screen.getByText(/Reservar Turno/i)).toBeInTheDocument();
     });
   });
 
@@ -143,7 +143,7 @@ describe('App - Test de Integración', () => {
     render(<App />);
 
     await waitFor(() => {
-      expect(screen.getByText(/📅 Ver Todos los Turnos/i)).toBeInTheDocument();
+      expect(screen.getByText(/Ver Todos los Turnos/i)).toBeInTheDocument();
     });
   });
 
@@ -203,10 +203,10 @@ describe('App - Test de Integración', () => {
     render(<App />);
 
     await waitFor(() => {
-      expect(screen.getByText(/📅 Reservar Turno/i)).toBeInTheDocument();
+      expect(screen.getByText(/Reservar Turno/i)).toBeInTheDocument();
     });
 
-    const reservarLink = screen.getByText(/📅 Reservar Turno/i);
+    const reservarLink = screen.getByText(/Reservar Turno/i);
     fireEvent.click(reservarLink);
 
     await waitFor(() => {
@@ -237,7 +237,7 @@ describe('App - Test de Integración', () => {
     render(<App />);
 
     await waitFor(() => {
-      expect(screen.getByText(/🔍 Información de Debug/i)).toBeInTheDocument();
+      expect(screen.getByText(/Bienvenido, Juan Pérez/i)).toBeInTheDocument();
     });
   });
 

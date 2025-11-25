@@ -1,9 +1,13 @@
-import { describe, test, it, expect } from 'vitest'
+import { describe, test, it, expect, beforeEach } from 'vitest'
 import {UsuarioService} from '../../src/service/UsuarioService'
 
 describe('Funciones de UsuarioService', () => {
+    beforeEach(() => {
+        UsuarioService.resetInstance()
+    })
+
     it('addUsuario', () => {
-        const svc = new UsuarioService()
+        const svc = UsuarioService.getInstance()
         const usu = svc.addUsuario('Pedro', 'none@email.com', '2932-400354', 'pepe2025', 'Barbero')
 
         expect(usu).toBeDefined()
@@ -11,7 +15,7 @@ describe('Funciones de UsuarioService', () => {
     })
 
     it('getUsuarioByEmail', () => {
-        const svc = new UsuarioService()
+        const svc = UsuarioService.getInstance()
         svc.addUsuario('Pedro', 'pedro@email.com', '2932-400354', 'pepe2025', 'Barbero')
         svc.addUsuario('Juan', 'juan@email.com', '2932-400874', 'juan2025', 'Cliente')
 
@@ -20,13 +24,13 @@ describe('Funciones de UsuarioService', () => {
     })
 
     it('deleteUsuario', () => {
-        const svc = new UsuarioService()
+        const svc = UsuarioService.getInstance()
         svc.addUsuario('Pedro', 'pedro@email.com', '2932-400354', 'pepe2025', 'Barbero')
         svc.addUsuario('Juan', 'juan@email.com', '2932-400874', 'juan2025', 'Cliente')
 
         const valor = svc.deleteUsuario('pedro@email.com')
         expect(valor).toBe(true)
         expect(svc.getSize()).toBe(1)
-     
+
     })
 })

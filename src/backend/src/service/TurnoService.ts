@@ -2,9 +2,21 @@ import { Turno } from "../factories/Turno";
 
 export class TurnoService {
 
+    private static instance: TurnoService;
     private turnosList:Turno[] = []
 
-    constructor(){}
+    private constructor(){}
+
+    public static getInstance(): TurnoService {
+        if (!TurnoService.instance) {
+            TurnoService.instance = new TurnoService();
+        }
+        return TurnoService.instance;
+    }
+
+    public static resetInstance(): void {
+        TurnoService.instance = new TurnoService();
+    }
 
     getSize():number{
         return this.turnosList.length

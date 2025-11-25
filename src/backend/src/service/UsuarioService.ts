@@ -2,7 +2,21 @@ import { Usuario } from "../factories/Usuario";
 
 export class UsuarioService {
 
+    private static instance: UsuarioService;
     private usuarioList:Usuario[] = []
+
+    private constructor(){}
+
+    public static getInstance(): UsuarioService {
+        if (!UsuarioService.instance) {
+            UsuarioService.instance = new UsuarioService();
+        }
+        return UsuarioService.instance;
+    }
+
+    public static resetInstance(): void {
+        UsuarioService.instance = new UsuarioService();
+    }
 
     getSize():number{
         return this.usuarioList.length

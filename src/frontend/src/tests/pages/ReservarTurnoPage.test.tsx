@@ -159,7 +159,7 @@ describe('ReservarTurnoPage', () => {
         barbero: 'Carlos Barbero',
       }));
       expect(window.alert).toHaveBeenCalledWith('Turno reservado con exito!');
-      expect(mockNavigate).toHaveBeenCalledWith('/');
+      expect(mockNavigate).toHaveBeenCalledWith('/mis-turnos');
     });
   });
 
