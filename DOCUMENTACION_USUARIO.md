@@ -84,9 +84,15 @@ Esto instalará todas las dependencias necesarias del cliente.
 
 ### 1. Configurar Base de Datos MongoDB
 
-#### Opción A: MongoDB Local
+**POR DEFECTO:** El proyecto ya viene configurado con MongoDB Atlas (Cloud). No necesitas hacer nada.
 
-1. Iniciar el servicio de MongoDB:
+#### Opción Alternativa: MongoDB Local
+
+Si prefieres usar MongoDB local en lugar de Atlas:
+
+1. Instalar MongoDB desde https://www.mongodb.com/try/download/community
+
+2. Iniciar el servicio de MongoDB:
 
 **Windows:**
 ```bash
@@ -98,30 +104,59 @@ net start MongoDB
 sudo systemctl start mongod
 ```
 
-2. Verificar que MongoDB esté corriendo en `mongodb://localhost:27017`
-
-#### Opción B: MongoDB Atlas (Cloud)
-
-1. Crear una cuenta en https://www.mongodb.com/cloud/atlas
-2. Crear un cluster gratuito
-3. Obtener la URI de conexión
-4. Actualizar el archivo `.env` del backend con tu URI
+3. Actualizar el archivo `.env` del backend:
+```env
+URL_DATABASE=mongodb://localhost:27017/barberia
+```
 
 ### 2. Configurar Variables de Entorno
 
-El backend ya incluye un archivo `.env` con la configuración por defecto:
+El backend ya incluye un archivo `.env` con MongoDB Atlas configurado:
 
 ```env
-MONGO_URI=mongodb://localhost:27017/barberia
-PORT=3001
-JWT_SECRET=tu_clave_secreta_aqui
+URL_DATABASE=mongodb+srv://Imprenta_Backend01:imprentapassword@clustermataviez.a1t0imp.mongodb.net/Peluqueria?retryWrites=true&w=majority
+PORT=3000
+PASSWORD_JWT=palabrasecreta
 ```
 
-**Importante:** Si usas MongoDB Atlas, modifica `MONGO_URI` con tu cadena de conexión.
+**IMPORTANTE:** MongoDB Atlas ya esta configurado y listo para usar. No necesitas instalar MongoDB local.
+
+**Alternativa (MongoDB Local):** Si prefieres usar MongoDB local, modifica `URL_DATABASE` en el archivo `.env`:
+```env
+URL_DATABASE=mongodb://localhost:27017/barberia
+```
 
 ---
 
 ## Ejecución del Proyecto
+
+### Paso Previo: Poblar la Base de Datos (Recomendado)
+
+Antes de ejecutar el proyecto, puedes cargar datos de prueba:
+
+```bash
+cd backend
+npm run seed
+```
+
+**Esto creará:**
+- 1 barbero: Carlos Martinez
+- 1 cliente: Juan Perez
+- 1 turno de ejemplo (para mañana)
+
+**Credenciales de prueba:**
+
+**Barbero:**
+- Email: `barbero@test.com`
+- Password: `123456`
+
+**Cliente:**
+- Email: `cliente@test.com`
+- Password: `123456`
+
+**Nota:** El seed limpia y repobla la base de datos. Ejecutarlo solo una vez o cuando quieras resetear los datos.
+
+---
 
 ### Opción 1: Ejecución Manual (Desarrollo)
 

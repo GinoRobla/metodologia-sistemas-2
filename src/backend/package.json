@@ -6,7 +6,8 @@
     "test": "vitest",
     "coverage": "vitest --coverage",
     "build": "npx tsc --watch",
-    "dev": "node --watch ./dist/index.js"
+    "dev": "node --watch ./dist/index.js",
+    "seed": "npx tsx src/seed.ts"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +15,7 @@
   "type": "commonjs",
   "description": "",
   "dependencies": {
+    "bcryptjs": "^3.0.3",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
@@ -23,6 +25,7 @@
     "zod": "^4.1.12"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.5",
     "@types/jsonwebtoken": "^9.0.10",

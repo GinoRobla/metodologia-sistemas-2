@@ -154,8 +154,9 @@ Vista completa de todos los turnos agendados en la barberia.
 
 ### Requisitos Previos
 - Node.js 18 o superior
-- MongoDB 6.0 o superior
 - Git
+
+**Nota:** MongoDB ya esta configurado con Atlas (cloud), no necesitas instalarlo localmente.
 
 ### Clonar el Repositorio
 
@@ -180,25 +181,32 @@ npm install
 
 ### Configurar Variables de Entorno
 
-El backend incluye un archivo `.env` con la configuracion por defecto:
+El backend incluye un archivo `.env` con MongoDB Atlas ya configurado:
 
 ```env
-MONGO_URI=mongodb://localhost:27017/barberia
-PORT=3001
-JWT_SECRET=tu_clave_secreta_aqui
+URL_DATABASE=mongodb+srv://Imprenta_Backend01:imprentapassword@clustermataviez.a1t0imp.mongodb.net/Peluqueria?retryWrites=true&w=majority
+PORT=3000
+PASSWORD_JWT=palabrasecreta
 ```
 
-### Iniciar MongoDB
+**IMPORTANTE:** No necesitas configurar nada. MongoDB Atlas ya esta listo para usar.
 
-**Windows:**
+Si prefieres usar MongoDB local, modifica `URL_DATABASE` en el `.env` y asegurate de tener MongoDB corriendo localmente.
+
+### Poblar la Base de Datos (Recomendado)
+
+Cargar datos de prueba antes de iniciar:
+
 ```bash
-net start MongoDB
+cd backend
+npm run seed
 ```
 
-**Linux/Mac:**
-```bash
-sudo systemctl start mongod
-```
+**Credenciales de prueba:**
+- Barbero: `barbero@test.com` / `123456`
+- Cliente: `cliente@test.com` / `123456`
+
+---
 
 ### Ejecutar el Proyecto
 
