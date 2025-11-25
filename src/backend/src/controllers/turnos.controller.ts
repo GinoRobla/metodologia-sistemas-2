@@ -20,9 +20,6 @@ export class TurnosController {
         try{
             const {cliente} = req.body
             const turno = await Turno.find({cliente: cliente})
-            if(turno.length === 0){
-                return res.status(404).json({error: 'El cliente no tiene ningun turno agendado'})
-            }
             return res.status(200).json(turno)
         }catch{
             return res.status(401).json({error: 'Error al obtener los datos'})
@@ -117,6 +114,7 @@ export class TurnosController {
                 cliente: turno.cliente,
                 barbero: turno.barbero,
                 fecha: turno.fecha,
+                tipo: tipo,
                 servicios: turno.servicios,
                 duracion: turno.duracion,
                 precio: turno.precio

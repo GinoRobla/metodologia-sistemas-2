@@ -169,9 +169,9 @@ function ReservarTurnoPage() {
       // Enviar al backend
       await api.post('/turnos', turnoData);
 
-      // Redirigir a "Mis Turnos" (cuando la creemos)
+      // Redirigir a "Mis Turnos"
       alert('Turno reservado con exito!');
-      navigate('/');
+      navigate('/mis-turnos');
     } catch (err) {
       console.error('Error al reservar turno:', err);
       const errorMessage = err instanceof Error && 'response' in err

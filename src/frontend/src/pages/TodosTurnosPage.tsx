@@ -132,19 +132,24 @@ function TodosTurnosPage() {
         <div className="todos-turnos-container">
             {/* NAVBAR */}
             <nav className="navbar">
-                {/* (Contenido) */}
                 <div className="navbar-content">
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                        <h2>💈 Turnos Agendados (Barbero)</h2>
-                    </div>
+                    <h2>
+                        <svg className="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                        </svg>
+                        Sistema de Turnos - Barbería
+                    </h2>
                     <div className="navbar-right">
                         <Link to="/" className="btn-back">
-                            ← Volver al Inicio
+                            <svg className="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                            </svg>
+                            Volver al Inicio
                         </Link>
-                        <span className="user-info">
-                            {user?.nombre} ({user?.tipoUsuario})
-                        </span>
                         <button onClick={handleLogout} className="btn-logout">
+                            <svg className="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                            </svg>
                             Cerrar Sesión
                         </button>
                     </div>
@@ -153,12 +158,23 @@ function TodosTurnosPage() {
 
             {/*CONTENIDO PRINCIPAL*/}
             <div className="page-content">
-                <h1>Todos los Turnos Programados</h1>
-                {error && <div className="error-message" style={{ color: 'red', marginBottom: '20px' }}>{error}</div>}
+                <div className="page-header">
+                    <h1>
+                        <svg className="title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                        </svg>
+                        Todos los Turnos Programados
+                    </h1>
+                </div>
+
+                {error && <div className="error-message">{error}</div>}
 
                 {turnos.length === 0 && !error ? (
                     // Estado Vacio
                     <div className="empty-state">
+                        <svg className="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
                         <h3>No hay turnos programados</h3>
                         <p>El calendario está vacío.</p>
                     </div>

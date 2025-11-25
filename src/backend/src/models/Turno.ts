@@ -6,6 +6,7 @@ const turnoSchema = new Schema({
     cliente: String,
     barbero: String,
     fecha: String,
+    tipo: String,
     servicios: String,
     duracion: Number,
     precio: Number
