@@ -166,6 +166,7 @@ Necesitarás **3 terminales** abiertas:
 
 ```bash
 cd backend
+npm run build
 npm run dev
 ```
 
