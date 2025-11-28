@@ -215,6 +215,7 @@ Necesitaras 2 terminales:
 **Terminal 1 - Backend:**
 ```bash
 cd backend
+npm run build
 npm run dev
 ```
 
